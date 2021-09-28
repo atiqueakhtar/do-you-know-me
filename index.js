@@ -2,6 +2,24 @@ var readlineSync = require("readline-sync");
 var username = readlineSync.question("What is your name? ");
 console.log(`Welcome ${username}`);
 var count = 0;
+var questionList = [
+  {
+    "question":"Where do I live? ",
+    "answer":"bokaro"
+  },
+  {
+    "question":"Is my age greater than 25? ",
+    "answer":"no"
+  },
+  {
+    "question":"What's my favourite food ",
+    "answer":"briyani"
+  },
+  {
+    "question":"Where do I work? ",
+    "answer":"zs"
+  }
+]
 function correctAns(){
   count++;
   console.log(`Correct Answer!`);
@@ -13,25 +31,17 @@ function wrongAns(){
   console.log(`Your current score is ${count}`);
   console.log(`------------------------------`);
 }
-var location = readlineSync.question("Where do I live? ");
-if(location === "bokaro"){
-  correctAns();
+function ansCheck(givenAns, expectedAns){
+  if(givenAns === expectedAns){
+    correctAns();
+  }
+  else{
+    wrongAns();
+  }
 }
-else{
-  wrongAns();
-}
-var food = readlineSync.question("What's my favourite food? ");
-if(location === "briyani"){
-  correctAns();
-}
-else{
-  wrongAns();
-}
-var location = readlineSync.question("Where do I work? ");
-if(location === "zs"){
-  correctAns();
-}
-else{
-  wrongAns();
+let n = questionList.length;
+for(let i=0; i<n; i++){
+  var answer = readlineSync.question(questionList[i].question);
+  ansCheck(answer, questionList[i].answer);
 }
 console.log(`Your final score is ${count}`);
